@@ -1,0 +1,22 @@
+﻿@model ProductsWebApp.Models.ProductsTable
+
+
+
+@Html.Partial("productListView", Model.ProductsList)
+
+<div class="row">
+    <div class="col-md-4">
+        <label asp-for="PageCount" class="control-label"></label>
+        <label id="pageCount">@Model.PageCount</label>
+
+
+
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="CurrentPage" class="control-label"></label>
+        <input asp-for="CurrentPage" min=1 max="@Model.PageCount" id="currentPage" type="number" onchange="ChangeCurrentPage()" />
+    </div>
+</div>
+
+

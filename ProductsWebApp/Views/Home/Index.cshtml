@@ -1,0 +1,88 @@
+﻿@model ProductsViewModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+
+    <div class="text-center">
+
+        <h1 class="display-4">Products</h1>
+        <button id="btn_modal_window">Добавить продукт</button>
+        <div id="my_modal" class="modal">
+            <div class="modal_content">
+                <span class="close_modal_window">×</span>
+                <p>Добавить</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.Label("Наименование")
+                    </div>
+                    <div class="col-md-4">
+                        <input id="productName">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.Label("Выберите категорию")
+                    </div>
+                    <div class="col-md-4">
+                        @Html.DropDownList("categoryFilterItem", Model.Filter, new { @id = "categoryFilterItemModal" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="button" value="ДОБАВИТЬ" onclick="AddProduct()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                @Html.DropDownList("categoryFilterItem", Model.Filter, "Фильтр по категории", new { @onchange = "ChangeCategoryFilterItem(this.selectedOptions[0].value)" })
+            </div>
+            <div class="col-md-8">
+                @Html.Label("Количество элементов на странице:")
+                @Html.DropDownList("ItemsCountOnPageFilterItem", Model.ItemsCountOnPage, new { @onchange = "ChangeItemsCount(this.selectedOptions[0].value)" })
+            </div>
+        </div>
+                <div id="ProductsTable">
+                    @Html.Partial("ProductsTableView", Model.ProductsTable)
+                </div>
+            </div>
+
+
+
+
+
+        <style>
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.6);
+                z-index: 1000;
+            }
+
+                .modal .modal_content {
+                    background-color: #fefefe;
+                    margin: 15% auto;
+                    padding: 20px;
+                    border: 1px solid #888;
+                    width: 80%;
+                    z-index: 99999;
+                }
+
+                    .modal .modal_content .close_modal_window {
+                        color: #aaa;
+                        float: right;
+                        font-size: 28px;
+                        font-weight: bold;
+                        cursor: pointer;
+                    }
+        </style>
